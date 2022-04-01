@@ -17,18 +17,11 @@ export interface AppState {
     visibilityFilter: VisibilityFilter;
 }
 
+let currentId = 0;
 const initialState: AppState = {
-    todos: [
-        {
-            text: "Use Redux",
-            completed: false,
-            id: 0,
-        },
-    ],
+    todos: [{ id: currentId++, text: "Use Redux", completed: false }],
     visibilityFilter: VisibilityFilter.SHOW_ALL,
 };
-
-let currentId = 1;
 
 export const appSlice = createSlice({
     name: "app",
@@ -61,7 +54,8 @@ export const appSlice = createSlice({
             todo.completed = !todo.completed;
         },
         completeAllTodos: (state) => {
-            state.todos.forEach((todo) => (todo.completed = true));
+            const allCompleted = state.todos.every((todo) => todo.completed);
+            state.todos.forEach((todo) => (todo.completed = !allCompleted));
         },
         clearCompleted: (state) => {
             state.todos = state.todos.filter((todo) => !todo.completed);
