@@ -1,18 +1,19 @@
-import { createSelector } from "reselect";
-import { SHOW_ALL, SHOW_COMPLETED, SHOW_ACTIVE } from "../constants/TodoFilters";
+import { createSelector } from "@reduxjs/toolkit";
+import { VisibilityFilter } from "../appSlice";
+import { RootState } from "../store";
 
-const getVisibilityFilter = (state) => state.visibilityFilter;
-const getTodos = (state) => state.todos;
+const getVisibilityFilter = (state: RootState) => state.app.visibilityFilter;
+const getTodos = (state: RootState) => state.app.todos;
 
 export const getVisibleTodos = createSelector(
     [getVisibilityFilter, getTodos],
     (visibilityFilter, todos) => {
         switch (visibilityFilter) {
-            case SHOW_ALL:
+            case VisibilityFilter.SHOW_ALL:
                 return todos;
-            case SHOW_COMPLETED:
+            case VisibilityFilter.SHOW_COMPLETED:
                 return todos.filter((t) => t.completed);
-            case SHOW_ACTIVE:
+            case VisibilityFilter.SHOW_ACTIVE:
                 return todos.filter((t) => !t.completed);
             default:
                 throw new Error("Unknown filter: " + visibilityFilter);

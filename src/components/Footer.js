@@ -1,12 +1,12 @@
 import React from "react";
 import PropTypes from "prop-types";
 import FilterLink from "../containers/FilterLink";
-import { SHOW_ALL, SHOW_COMPLETED, SHOW_ACTIVE } from "../constants/TodoFilters";
+import { VisibilityFilter } from "../appSlice";
 
 const FILTER_TITLES = {
-    [SHOW_ALL]: "All",
-    [SHOW_ACTIVE]: "Active",
-    [SHOW_COMPLETED]: "Completed",
+    [VisibilityFilter.SHOW_ALL]: "All",
+    [VisibilityFilter.SHOW_ACTIVE]: "Active",
+    [VisibilityFilter.SHOW_COMPLETED]: "Completed",
 };
 
 const Footer = (props) => {

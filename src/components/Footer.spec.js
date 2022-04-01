@@ -2,7 +2,7 @@ import React from "react";
 import { createRenderer } from "react-test-renderer/shallow";
 import Footer from "./Footer";
 import FilterLink from "../containers/FilterLink";
-import { SHOW_ALL, SHOW_ACTIVE, SHOW_COMPLETED } from "../constants/TodoFilters";
+import { VisibilityFilter } from "../appSlice";
 
 const setup = (propOverrides) => {
     const props = Object.assign(
@@ -59,7 +59,11 @@ describe("components", () => {
         });
 
         it("should render filters", () => {
-            const todoFilters = [SHOW_ALL, SHOW_ACTIVE, SHOW_COMPLETED];
+            const todoFilters = [
+                VisibilityFilter.SHOW_ALL,
+                VisibilityFilter.SHOW_ACTIVE,
+                VisibilityFilter.SHOW_COMPLETED,
+            ];
             const filterTitles = ["All", "Active", "Completed"];
             const { output } = setup();
             const [, filters] = output.props.children;

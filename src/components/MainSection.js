@@ -13,7 +13,7 @@ const MainSection = ({ todosCount, completedCount, actions }) => (
                     checked={completedCount === todosCount}
                     readOnly
                 />
-                <label onClick={actions.completeAllTodos} />
+                <label onClick={() => actions.completeAllTodos()} />
             </span>
         )}
         <VisibleTodoList />
@@ -21,7 +21,7 @@ const MainSection = ({ todosCount, completedCount, actions }) => (
             <Footer
                 completedCount={completedCount}
                 activeCount={todosCount - completedCount}
-                onClearCompleted={actions.clearCompleted}
+                onClearCompleted={() => actions.clearCompleted()}
             />
         )}
     </section>
