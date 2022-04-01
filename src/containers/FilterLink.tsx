@@ -5,9 +5,8 @@ import { useAppDispatch, useAppSelector } from "../store";
 const FilterLink = ({ filter, ...props }: { filter: VisibilityFilter }) => {
     const dispatch = useAppDispatch();
     const active = useAppSelector((state) => filter === state.app.visibilityFilter);
-    const setFilter = dispatch(actions.setVisibilityFilter);
+    const setFilter = () => dispatch(actions.setVisibilityFilter(filter));
 
-    // @ts-ignore
     return <Link active={active} setFilter={setFilter} {...props} />;
 };
 

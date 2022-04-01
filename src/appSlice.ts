@@ -7,9 +7,9 @@ export interface Todo {
 }
 
 export enum VisibilityFilter {
-    SHOW_ALL,
-    SHOW_COMPLETED,
-    SHOW_ACTIVE,
+    SHOW_ALL = "SHOW_ALL",
+    SHOW_COMPLETED = "SHOW_COMPLETED",
+    SHOW_ACTIVE = "SHOW_ACTIVE",
 }
 
 export interface AppState {
@@ -28,7 +28,7 @@ const initialState: AppState = {
     visibilityFilter: VisibilityFilter.SHOW_ALL,
 };
 
-let currentId = 0;
+let currentId = 1;
 
 export const appSlice = createSlice({
     name: "app",
@@ -60,8 +60,12 @@ export const appSlice = createSlice({
 
             todo.completed = !todo.completed;
         },
-        completeAllTodos: (state, action) => {},
-        clearCompleted: (state, action) => {},
+        completeAllTodos: (state) => {
+            state.todos.forEach((todo) => (todo.completed = true));
+        },
+        clearCompleted: (state) => {
+            state.todos = state.todos.filter((todo) => !todo.completed);
+        },
 
         setVisibilityFilter: (state, action: PayloadAction<VisibilityFilter>) => {
             state.visibilityFilter = action.payload;
